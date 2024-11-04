@@ -1,18 +1,25 @@
-const users = JSON.parse(localStorage.getItem('users')) || [];
-
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Form submit නොකිරීමට
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const user = users.find(user => user.username === username && user.password === password);
-
-    if (user) {
-        alert('Login successful!');
-        // Redirect to home page
-        window.location.href = 'home.html';
+    // Username සහ Password වල සත්‍යාපනය
+    if (username === 'your_username' && password === 'your_password') {
+        document.getElementById('successModal').style.display = 'block'; // Modal එක පෙන්වන්න
     } else {
-        alert('Incorrect username or password!');
+        alert('Invalid username or password.'); // වැරදි alert එක
     }
 });
+
+// Modal එක close කිරීමට
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('successModal').style.display = 'none';
+});
+
+// Modal එකේ click කරන විට close කරන්න
+window.onclick = function(event) {
+    const modal = document.getElementById('successModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
